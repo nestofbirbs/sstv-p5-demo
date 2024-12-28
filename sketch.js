@@ -55,15 +55,17 @@ function createUserInterface() {
     modeSelect.option(label, key);
   }
 
-  // Set the default mode (see SSTV_MODES for the list of modes)
-  modeSelect.selected("M1");
-  initializeFormat(modeSelect.value());
+  // Retrieve the last selected mode from localStorage or set default
+  const startingMode = localStorage.getItem('sstvMode') || 'M1';
+  modeSelect.selected(startingMode);
+  initializeFormat(startingMode);
 
   // Set callback for mode selection
   modeSelect.changed(() => {
     const mode = modeSelect.value();
     console.log(`Selected mode: ${mode} (${SSTV_MODES[mode].label})`);
     updateFormat(mode);
+    localStorage.setItem('sstvMode', mode); // Save selected mode to localStorage
   });
 
   startButton = createButton("Encode");
