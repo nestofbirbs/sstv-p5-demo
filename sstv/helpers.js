@@ -17,7 +17,7 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 */
 
-function encodeAudio(sstvFormat, canvasData) {
+function encodeAudio(canvasData) {
     if (!sstvFormat) {
         console.error("SSTV format is not selected.");
         return;
@@ -32,8 +32,6 @@ function encodeAudio(sstvFormat, canvasData) {
 
     let oscillator = audioCtx.createOscillator();
     oscillator.type = "sine";
-
-    console.log("oscillator:", oscillator);
 
     oscillator.connect(audioCtx.destination);
 
