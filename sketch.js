@@ -1,8 +1,9 @@
 let startButton;
 let downloadButton;
 
-let canvas;
+// let canvas;
 let canvasCtx;
+let cnvData;
 
 let sstvFormat;
 
@@ -41,6 +42,8 @@ function draw() {
     fill(random(255), random(255), random(255));
     ellipse(random(width), random(height), random(10, 100));
   }
+
+  cnvData = drawingContext.getImageData(0, 0, width, height);
 }
 
 function createUserInterface() {
@@ -68,8 +71,6 @@ function createUserInterface() {
 
   downloadButton = createButton("Download");
   downloadButton.id("downloadButton");
-
-  let cnvData = drawingContext.getImageData(0, 0, width, height);
 
   startButton.mousePressed(() => {
     if (validateCanvasData(cnvData)) {
