@@ -1,9 +1,7 @@
 let startButton;
 let downloadButton;
 
-// let canvas;
-let canvasCtx;
-let cnvData;
+let canvasData;
 
 let sstvFormat;
 
@@ -43,7 +41,9 @@ function draw() {
     ellipse(random(width), random(height), random(10, 100));
   }
 
-  cnvData = drawingContext.getImageData(0, 0, width, height);
+  // Save the color data from the canvas as a Uint8ClampedArray 
+  // so the callback functions of the buttons can access it later
+  canvasData = drawingContext.getImageData(0, 0, width, height);
 }
 
 function createUserInterface() {
@@ -73,16 +73,16 @@ function createUserInterface() {
   downloadButton.id("downloadButton");
 
   startButton.mousePressed(() => {
-    if (validateCanvasData(cnvData)) {
-      encodeAudio(cnvData);
+    if (validateCanvasData(canvasData)) {
+      encodeAudio(canvasData);
     } else {
       console.error("Invalid canvas data. Encoding aborted.");
     }
   });
 
   downloadButton.mousePressed(() => {
-    if (validateCanvasData(cnvData)) {
-      downloadAudio(cnvData);
+    if (validateCanvasData(canvasData)) {
+      downloadAudio(canvasData);
     } else {
       console.error("Invalid canvas data. Download aborted.");
     }
