@@ -150,12 +150,29 @@ function validateCanvasData(canvasData) {
     return false;
   }
 
+  // Check if canvasData.data is an instance of Uint8ClampedArray
+  if (!(canvasData.data instanceof Uint8ClampedArray)) {
+    console.error("Canvas data is not a Uint8ClampedArray.");
+    return false;
+  }
+
+  // Check if canvasData.data has a length greater than zero
+  if (canvasData.data.length === 0) {
+    console.error("Canvas data is empty.");
+    return false;
+  }
+
   // Ensure all data values are finite numbers
   for (let value of canvasData.data) {
     if (!isFinite(value)) {
       console.error("Canvas data contains non-finite values.");
       return false;
     }
+  }
+
+  // Check if canvasData.data is full of zeros
+  if (canvasData.data.every(value => value === 0)) {
+    console.warn("Canvas data is valid but all values are zero.");
   }
 
   return true;
