@@ -111,37 +111,4 @@ function downloadAudio(canvasData) {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     });
-
-    endTime = sstvFormat.encodeSSTV(oscillator, 1);
-    console.log(endTime - 1);
-    oscillator.start(1);
-
-    offlineCtx.startRendering().then((audioBuffer) => {
-        const audioData = audioBuffer.getChannelData(0); // Get first audio channel
-
-        // Convert Float32Array to Int16Array
-        const audioLength = audioData.length;
-        const audioInt16 = new Int16Array(audioLength);
-        for (let i = 0; i < audioLength; i++) {
-            audioInt16[i] = Math.max(-1, Math.min(1, audioData[i])) * 32767;
-        }
-
-        // Convert the audio data to a Blob for download
-        const wavHeader = createWAVHeader(audioInt16.length * 2); // 2 bytes per sample
-        const wavFile = new Uint8Array(wavHeader.byteLength + audioInt16.byteLength);
-        wavFile.set(new Uint8Array(wavHeader), 0);
-        wavFile.set(new Uint8Array(audioInt16.buffer), wavHeader.byteLength);
-
-        const blob = new Blob([wavFile], { type: 'audio/wav' });
-
-        // Download the Blob
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'sstv_signal.wav';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    });
 }
