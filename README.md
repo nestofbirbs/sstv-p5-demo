@@ -1,13 +1,17 @@
 # SSTV Encoding for p5.js
 
-This project demonstrates how to encode images created with [p5.js](https://p5js.org/) into [Slow Scan Television](https://en.wikipedia.org/wiki/Slow-scan_television) (SSTV) audio signals.
+This project demonstrates how to encode images created with [p5.js](https://p5js.org/) into audio signals that can be transmitted over radio using [Slow Scan Television](https://en.wikipedia.org/wiki/Slow-scan_television) (SSTV).
 
-[p5.js](https://p5js.org/) is a friendly tool for learning how to code and make code-based art. It is inspired by Processing, but is written in Javascript and runs in the browser.
-
-[Slow Scan Television](https://en.wikipedia.org/wiki/Slow-scan_television) (SSTV) is a method of transmitting static images via radio waves, used mainly by [amateur radio operators](https://en.wikipedia.org/wiki/Amateur_radio_operator).
+This project is a fun way to learn about  encoding images and radio communication. It is not intended for anything serious. However, feel free to use it for educational purposes, to build cool art projects, or just for fun! Plus, if the internet disappears and you need to transmit your generative art over radio, you'll be ready 🙃
 
 > [!NOTE]
 > This project is heavily based on the amazing [Web-SSTV](https://github.com/CKegel/Web-SSTV/) by Christian Kegel. Please support the official release.
+
+## About p5.js
+[p5.js](https://p5js.org/) is a friendly tool for learning how to code and make code-based art. It is inspired by [Processing](https://processing.org/), but is written in Javascript and runs in the browser.
+
+## About SSTV
+[Slow Scan Television](https://en.wikipedia.org/wiki/Slow-scan_television) (SSTV) is a method of transmitting static images via radio waves, used mainly by [amateur radio operators](https://en.wikipedia.org/wiki/Amateur_radio_operator).
 
 ## Features
 - Encode the p5.js canvas into an SSTV audio signal
