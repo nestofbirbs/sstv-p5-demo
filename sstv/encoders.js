@@ -50,10 +50,9 @@ class MartinBase extends Format {
 			time += super.blankingInterval;
 			for(let dataLine = 0; dataLine < 3; ++dataLine) {
 				oscillator.frequency.setValueCurveAtTime(super.preparedImage[scanLine][dataLine], time, super.scanLineLength);
-				time += super.scanLineLength;
-				oscillator.frequency.setValueAtTime(BLANKING_PULSE_FREQ, time);
-				time += super.blankingInterval;
+				time += super.scanLineLength; // Increment time by scanLineLength only
 			}
+			time += super.blankingInterval; // Add blanking interval after each scan line
 		}
 
 		return time;
@@ -344,8 +343,9 @@ class WrasseSC2 extends Format {
 			time += super.blankingInterval;
 			for(let dataLine = 0; dataLine < 3; ++dataLine) {
 				oscillator.frequency.setValueCurveAtTime(super.preparedImage[scanLine][dataLine], time, super.scanLineLength);
-				time += super.scanLineLength;
+				time += super.scanLineLength; // Increment time by scanLineLength only
 			}
+			time += super.blankingInterval; // Add blanking interval after each scan line
 		}
 
 		return time;
