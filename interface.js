@@ -38,12 +38,17 @@ function createValidatedButton(label, id, callback) {
   let button = createButton(label);
   button.id(id);
   button.mousePressed(() => {
-    if (validateCanvasData(canvasData)) {
-      callback(canvasData);
+    const data = getCanvasData(); // Retrieve canvas data using the getter
+    if (validateCanvasData(data)) {
+      callback(data);
     } else {
       console.error(`Invalid canvas data. ${label} aborted.`);
     }
   });
+}
+
+function getCanvasData() {
+  return drawingContext.getImageData(0, 0, width, height);
 }
 
 function validateCanvasData(canvasData) {

@@ -1,7 +1,3 @@
-// This variable will hold the canvas data
-// So it can be accessed by the encoding functions
-let canvasData;
-
 function setup() {
   createCanvas(320, 256);
   createUserInterface();
