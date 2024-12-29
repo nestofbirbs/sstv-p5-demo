@@ -17,16 +17,11 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 */
 
+const audioCtx = new AudioContext();
+
 function encodeAudio(canvasData) {
     if (!sstvFormat) {
         console.error("SSTV format is not selected.");
-        return;
-    }
-
-    // Validate canvas data
-    const hasInvalidData = canvasData.data.some(value => !isFinite(value));
-    if (hasInvalidData) {
-        console.error("Canvas data contains non-finite values.");
         return;
     }
 
@@ -69,13 +64,6 @@ function createWAVHeader(audioLength) {
 function downloadAudio(sstvFormat, canvasData) {
     if (!sstvFormat) {
         console.error("SSTV format is not selected.");
-        return;
-    }
-
-    // Validate canvas data
-    const hasInvalidData = canvasData.data.some(value => !isFinite(value));
-    if (hasInvalidData) {
-        console.error("Canvas data contains non-finite values.");
         return;
     }
 
