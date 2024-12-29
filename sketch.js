@@ -1,9 +1,11 @@
+// This variable will hold the canvas data
+// So it can be accessed by the encoding functions
+let canvasData;
+
 function setup() {
   createCanvas(320, 256);
   createUserInterface();
   pixelDensity(1);
-  randomSeed(999);
-  noLoop();
 }
 
 function draw() {
@@ -13,4 +15,9 @@ function draw() {
     fill(random(255), random(255), random(255));
     ellipse(random(width), random(height), random(10, 100));
   }
+
+  // Set canvasData to the current canvas image
+  canvasData = drawingContext.getImageData(0, 0, width, height);
+  
+  noLoop();
 }

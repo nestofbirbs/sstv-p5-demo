@@ -61,7 +61,7 @@ function createWAVHeader(audioLength) {
     return header;
 }
 
-function downloadAudio(sstvFormat, canvasData) {
+function downloadAudio(canvasData) {
     if (!sstvFormat) {
         console.error("SSTV format is not selected.");
         return;
@@ -111,11 +111,6 @@ function downloadAudio(sstvFormat, canvasData) {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     });
-
-    if (hasInvalidImageData) {
-        console.error("Prepared image contains non-finite frequency values.");
-        return;
-    }
 
     endTime = sstvFormat.encodeSSTV(oscillator, 1);
     console.log(endTime - 1);

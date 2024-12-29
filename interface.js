@@ -30,7 +30,11 @@ function createUserInterface() {
 }
 
 function createValidatedButton(label, id, callback) {
-  const canvasData = drawingContext.getImageData(0, 0, width, height);
+  // Check that drawingContext exists
+  if (!drawingContext) {
+    console.error("drawingContext is missing.");
+    return;
+  }
   let button = createButton(label);
   button.id(id);
   button.mousePressed(() => {
