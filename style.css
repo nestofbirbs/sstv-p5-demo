@@ -33,7 +33,12 @@ html, body {
   border-radius: 5px;
   background-color: #383838;
   color: #e0e0e0;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); */
+  appearance: none; /* Hide the default caret */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e0e0e0"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 6px center; /* Nudge caret a few pixels to the left */
+  background-size: 16px; /* Increased caret size */
+  padding-right: 30px; /* Adjust padding to accommodate larger caret */
   cursor: pointer;
 }
 #downloadButton {
