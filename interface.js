@@ -7,8 +7,12 @@ function createUserInterface(defaultMode) {
     return;
   }
 
+  const controlsContainer = createDiv();
+  controlsContainer.class('controls');
+
   modeSelect = createSelect();
-  modeSelect.position(10, 10);
+  modeSelect.id("modeSelect");
+  controlsContainer.child(modeSelect);
 
   // Populate options using SSTV_MODES
   for (const [key, { name }] of Object.entries(SSTV_MODES)) {
@@ -31,10 +35,10 @@ function createUserInterface(defaultMode) {
   });
 
   // Create button for encoding
-  createValidatedButton("Play Signal", "startButton", playCallback);
+  createValidatedButton("Play Signal", "startButton", playCallback, controlsContainer);
 
   // Create button for downloading
-  createValidatedButton("Download .wav", "downloadButton", downloadCallback);
+  createValidatedButton("Download .wav", "downloadButton", downloadCallback, controlsContainer);
 }
 
 function playCallback() {
@@ -55,7 +59,7 @@ function updateCanvasFormat() {
   resizeCanvas(w, h);
 }
 
-function createValidatedButton(label, id, callback) {
+function createValidatedButton(label, id, callback, container) {
   // Check that drawingContext exists
   if (!drawingContext) {
     console.error("drawingContext is missing.");
@@ -71,6 +75,7 @@ function createValidatedButton(label, id, callback) {
       console.error(`Invalid canvas data. ${label} aborted.`);
     }
   });
+  container.child(button);
 }
 
 function getCanvasData() {

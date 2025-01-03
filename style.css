@@ -1,7 +1,38 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 canvas {
   display: block;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+#modeSelect, #startButton, #downloadButton {
+  padding: 6px 10px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+#modeSelect:hover, #startButton:hover, #downloadButton:hover {
+  background-color: #e0e0e0;
+}
+#modeSelect:focus, #startButton:focus, #downloadButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #007bff;
 }
