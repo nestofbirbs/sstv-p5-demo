@@ -1,5 +1,12 @@
 const sstv = new SSTVEncoder();
 
+let isTesting = false;
+let testPattern;
+
+function preload() {
+  testPattern = loadImage("./assets/images/PM5544.png");
+}
+
 function setup() {
   let w = sstv.pixelsPerLine;
   let h = sstv.numScanLines;
@@ -9,6 +16,13 @@ function setup() {
 }
 
 function draw() {
+  if(isTesting) {
+    image(testPattern, 0, 0, width, height);
+    drawCallsign();
+    noLoop();
+    return;
+  }
+
   background(255);
   noStroke();
   for (let i = 0; i < 100; i++) {
@@ -16,7 +30,7 @@ function draw() {
     ellipse(random(width), random(height), random(10, 100));
   }
 
-  drawCallsign(config.callsign, width * config.xPos, height * config.yPos, height * config.fontSize);
+  drawCallsign();
 
   // Ensure width and height are valid before getting image data
   if (Number.isFinite(width) && Number.isFinite(height)) {
@@ -28,7 +42,7 @@ function draw() {
   noLoop(); // Stop draw loop after one iteration
 }
 
-function drawCallsign(callsign, x = width/2, y = 40, size = 64) {
+function drawCallsign(callsign = config.callsign, x = width * config.xPos, y = height * config.yPos, size = height * config.fontSize) {
   textSize(size);
   fill(0);
   stroke(255);
@@ -41,7 +55,15 @@ function keyPressed() {
   let k = key.toLowerCase();
   switch (k) {
     case "r":
+      isTesting = false;
       redraw(); // Resume draw loop on mouse click
       break;
+    case "t":
+      isTesting = true;
+      redraw(); // Resume draw loop on mouse click
+      break;
+    default:
+      break;
   }
+  
 }
