@@ -14,7 +14,7 @@ html, body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   position: fixed;
   top: 0;
   background-color: #1e1e1e;
@@ -37,8 +37,8 @@ html, body {
   cursor: pointer;
 }
 #startButton {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -63,12 +63,12 @@ html, body {
   height: 24px;
 }
 #startButton.playing::before {
-  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>'); /* Updated fill color */
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><rect x="4" y="4" width="16" height="16"/></svg>'); 
 }
 #modeSelect:hover, #downloadButton:hover {
   background-color: #3e3e3e;
 }
-#modeSelect:focus, #startButton:focus, #downloadButton:focus {
+#modeSelect:focus-visible, #startButton:focus-visible, #downloadButton:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px #007bff;
 }
@@ -77,7 +77,7 @@ html, body {
   background-color: #333;
   height: 10px;
   position: fixed;
-  top: 50px; /* Position right below the controls container */
+  top: 60px; /* Position right below the controls container */
 }
 .progress-bar {
   width: 0;
