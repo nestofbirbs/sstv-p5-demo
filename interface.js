@@ -48,11 +48,24 @@ function createUserInterface(defaultMode) {
 
   // Create button for downloading
   createValidatedButton("Download .wav", "downloadButton", downloadCallback, rightContainer);
+
+  // Create progress bar
+  const progressBarContainer = createDiv();
+  progressBarContainer.class('progress-bar-container');
+  progressBarContainer.parent(document.body);
+
+  const progressBar = createDiv();
+  progressBar.class('progress-bar');
+  progressBar.id('progressBar');
+  progressBar.parent(progressBarContainer);
 }
 
 function playCallback() {
   const playButton = document.getElementById("startButton");
-  const isPlaying = encodeAudio(getCanvasData(), sstv.format);
+  const progressBar = document.getElementById("progressBar");
+  const isPlaying = encodeAudio(getCanvasData(), sstv.format, (progress) => {
+    progressBar.style.width = `${progress * 100}%`;
+  });
   playButton.textContent = isPlaying ? "Stop Signal" : "Play Signal";
 }
 

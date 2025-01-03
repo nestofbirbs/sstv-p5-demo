@@ -20,14 +20,16 @@ copies or substantial portions of the Software.
 const audioCtx = new AudioContext();
 
 let currentOscillator = null;
+let stopEncoding = false;
 
-function encodeAudio(canvasData, encoder) {
+function encodeAudio(canvasData, encoder, progressCallback) {
     if (!encoder) {
         console.error("SSTV encoder is not selected.");
         return false;
     }
 
     if (currentOscillator) {
+        stopEncoding = true;
         currentOscillator.stop();
         currentOscillator.disconnect();
         currentOscillator = null;
@@ -35,6 +37,7 @@ function encodeAudio(canvasData, encoder) {
         return false;
     }
 
+    stopEncoding = false;
     let oscillator = audioCtx.createOscillator();
     oscillator.type = "sine";
     oscillator.connect(audioCtx.destination);
@@ -42,12 +45,36 @@ function encodeAudio(canvasData, encoder) {
     encoder.prepareImage(canvasData.data);
     let startTime = audioCtx.currentTime + 1;
     let endTime = encoder.encodeSSTV(oscillator, audioCtx.currentTime + 1);
+
+    const duration = endTime - startTime;
+    const updateProgress = () => {
+        if (stopEncoding) {
+            if (progressCallback) {
+                progressCallback(0);
+            }
+            return;
+        }
+        const currentTime = audioCtx.currentTime;
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        if (progressCallback) {
+            progressCallback(progress);
+        }
+        if (progress < 1) {
+            requestAnimationFrame(updateProgress);
+        }
+    };
+    requestAnimationFrame(updateProgress);
+
     oscillator.start(startTime);
     oscillator.stop(endTime);
 
     currentOscillator = oscillator;
     oscillator.onended = () => {
         currentOscillator = null;
+        if (!stopEncoding && progressCallback) {
+            progressCallback(1);
+        }
         console.log("Signal playback ended.");
     };
 
