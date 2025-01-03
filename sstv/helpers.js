@@ -101,11 +101,17 @@ function downloadAudio(canvasData, encoder) {
 
         const blob = new Blob([wavFile], { type: 'audio/wav' });
 
+        // Generate filename with mode and date
+        const modeName = encoder.modeName.replace(/\s+/g, '');
+        // Get current time in YYYYMMDD_HHMMSS format 
+        const date = new Date().toISOString().slice(0, 19).replace(/[-:]/g, '').replace('T', '-');
+        const filename = `${date}_SSTV_${modeName}.wav`;
+
         // Download the Blob
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'sstv_signal.wav';
+        a.download = filename;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
