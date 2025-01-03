@@ -10,7 +10,14 @@ function preload() {
 function setup() {
   let w = sstv.pixelsPerLine;
   let h = sstv.numScanLines;
-  createCanvas(w, h);
+
+  const canvasContainer = createDiv();
+  canvasContainer.class('canvas-container');
+  canvasContainer.parent(document.body); // Append to body
+
+  const canvas = createCanvas(w, h);
+  canvas.parent(canvasContainer); // Append canvas to container
+
   createUserInterface(config.defaultMode);
   pixelDensity(1);
 }

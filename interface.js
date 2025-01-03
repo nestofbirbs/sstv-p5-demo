@@ -9,10 +9,19 @@ function createUserInterface(defaultMode) {
 
   const controlsContainer = createDiv();
   controlsContainer.class('controls');
+  controlsContainer.parent(document.body); // Append to body
+
+  const leftContainer = createDiv();
+  leftContainer.class('left');
+  leftContainer.parent(controlsContainer);
+
+  const rightContainer = createDiv();
+  rightContainer.class('right');
+  rightContainer.parent(controlsContainer);
 
   modeSelect = createSelect();
   modeSelect.id("modeSelect");
-  controlsContainer.child(modeSelect);
+  leftContainer.child(modeSelect);
 
   // Populate options using SSTV_MODES
   for (const [key, { name }] of Object.entries(SSTV_MODES)) {
@@ -35,10 +44,10 @@ function createUserInterface(defaultMode) {
   });
 
   // Create button for encoding
-  createValidatedButton("Play Signal", "startButton", playCallback, controlsContainer);
+  createValidatedButton("Play Signal", "startButton", playCallback, rightContainer);
 
   // Create button for downloading
-  createValidatedButton("Download .wav", "downloadButton", downloadCallback, controlsContainer);
+  createValidatedButton("Download .wav", "downloadButton", downloadCallback, rightContainer);
 }
 
 function playCallback() {
