@@ -37,7 +37,7 @@ Multiple SSTV modes are supported, including:
 -   **Martin** (e.g., Martin M1, Martin M2)
 -   **Scottie** (e.g., Scottie S1, Scottie S2, Scottie DX)
 -   **PD** (e.g., PD50, PD90, PD120, PD160)
--   **WRASSE SC2-180**
+-   **WRAASE SC2-180**
 
 ## Contributing
 

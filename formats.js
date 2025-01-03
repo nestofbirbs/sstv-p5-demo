@@ -46,8 +46,8 @@ function updateFormat(encodingMode = "M1") {
     case "RobotBW8":
       sstvFormat = new RobotBW8();
       break;
-    case "WrasseSC2180":
-      sstvFormat = new WrasseSC2180();
+    case "WraaseSC2180":
+      sstvFormat = new WraaseSC2180();
       break;
     default:
       sstvFormat = null; // Or handle invalid mode here

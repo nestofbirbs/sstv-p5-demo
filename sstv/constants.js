@@ -37,7 +37,7 @@ const SSTV_MODES = {
     S1: { label: "Scottie 1", class: "Scottie", horizontalResolution: 320, lines: 256, headerLines: 16 },
     S2: { label: "Scottie 2", class: "Scottie", horizontalResolution: 160, lines: 256, headerLines: 16 },
     SDX: { label: "Scottie DX", class: "Scottie", horizontalResolution: 320, lines: 256, headerLines: 16 },
-    WrasseSC2180: { label: "SC2-180", class: "Wrasse", horizontalResolution: 320, lines: 256 },
+    WraaseSC2180: { label: "SC2-180", class: "Wraase", horizontalResolution: 320, lines: 256 },
     PD50: { label: "PD-50", class: "PD", horizontalResolution: 320, lines: 256, headerLines: 16 },
     PD90: { label: "PD-90", class: "PD", horizontalResolution: 320, lines: 256, headerLines: 16 },
     PD120: { label: "PD-120", class: "PD", horizontalResolution: 640, lines: 496, headerLines: 16 },

@@ -311,7 +311,7 @@ class PD290 extends PDBase {
 	}
 }
 
-class WrasseSC2 extends Format {
+class WraaseSC2 extends Format {
 	prepareImage(data) {
 		let preparedImage = [];
 		for(let scanLine = 0; scanLine < this.numScanLines; ++scanLine){
@@ -355,7 +355,7 @@ class WrasseSC2 extends Format {
 		return (super.numScanLines * (super.syncPulseLength + super.blankingInterval + super.scanLineLength * 3));
 	}
 }
-class WrasseSC2180 extends WrasseSC2 {
+class WraaseSC2180 extends WraaseSC2 {
 	constructor() {
 		let numScanLines = 256;
 		let vertResolution = 320;
