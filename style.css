@@ -19,12 +19,13 @@ html, body {
   top: 0;
   background-color: #1e1e1e;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  z-index: 2; /* Ensure controls are above the progress bar */
 }
 .controls .left, .controls .right {
   display: flex;
   gap: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 14px;
+  padding-right: 14px;
 }
 #modeSelect, #downloadButton {
   padding: 6px 10px;
@@ -74,15 +75,23 @@ html, body {
 }
 .progress-bar-container {
   width: 100%;
-  background-color: #333;
+  background-color: #414141;
   height: 10px;
   position: fixed;
   top: 60px; /* Position right below the controls container */
+  transform: translateY(-100%);
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  z-index: 1; /* Ensure it is behind the controls container */
+  opacity: 0;
+}
+.progress-bar-container.show {
+  transform: translateY(0);
+  opacity: 1;
 }
 .progress-bar {
   width: 0;
   height: 100%;
-  background-color: #007bff;
+  background-color: #e9c835;
 }
 .canvas-container {
   display: flex;
