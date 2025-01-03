@@ -63,8 +63,21 @@ html, body {
   width: 100%;
   margin-top: 70px; /* Adjust margin to avoid overlap with controls and progress bar */
 }
+.canvas-wrapper {
+  position: relative;
+}
 canvas {
   display: block;
   border: 1px solid #535353;
   background-color: #383838;
+}
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  display: none; /* Initially hidden */
 }

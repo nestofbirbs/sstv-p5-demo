@@ -15,8 +15,12 @@ function setup() {
   canvasContainer.class('canvas-container');
   canvasContainer.parent(document.body); // Append to body
 
+  const canvasWrapper = createDiv();
+  canvasWrapper.class('canvas-wrapper');
+  canvasWrapper.parent(canvasContainer); // Append wrapper to container
+
   const canvas = createCanvas(w, h);
-  canvas.parent(canvasContainer); // Append canvas to container
+  canvas.parent(canvasWrapper); // Append canvas to wrapper
 
   createUserInterface(config.defaultMode);
   pixelDensity(1);
@@ -72,5 +76,4 @@ function keyPressed() {
     default:
       break;
   }
-  
 }

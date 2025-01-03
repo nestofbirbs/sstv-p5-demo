@@ -58,17 +58,32 @@ function createUserInterface(defaultMode) {
   progressBar.class('progress-bar');
   progressBar.id('progressBar');
   progressBar.parent(progressBarContainer);
+
+  // Create overlay
+  const overlay = createDiv();
+  overlay.class('overlay');
+  overlay.id('overlay');
+  overlay.parent(document.querySelector('.canvas-wrapper'));
 }
 
 function playCallback() {
   const playButton = document.getElementById("startButton");
   const progressBar = document.getElementById("progressBar");
+  const overlay = document.getElementById("overlay");
   const isPlaying = encodeAudio(getCanvasData(), sstv.format, (progress) => {
-    progressBar.style.width = `${progress * 100}%`;
+    let percent = max(0,progress);
+    progressBar.style.width = `${max(0,percent) * 100}%`;
+    overlay.style.height = `${100 - percent * 100}%`;
+    console.log(`percent: ${percent * 100}%`);
   }, () => {
     playButton.textContent = "Play Signal";
+    overlay.style.display = "none";
   });
   playButton.textContent = isPlaying ? "Stop Signal" : "Play Signal";
+  if (isPlaying) {
+    overlay.style.display = "block";
+    overlay.style.height = "100%";
+  }
 }
 
 function downloadCallback() {
