@@ -52,7 +52,7 @@ function createUserInterface(defaultMode) {
   // Create progress bar
   const progressBarContainer = createDiv();
   progressBarContainer.class('progress-bar-container');
-  progressBarContainer.parent(document.body);
+  progressBarContainer.parent(controlsContainer);
 
   const progressBar = createDiv();
   progressBar.class('progress-bar');
@@ -65,6 +65,8 @@ function playCallback() {
   const progressBar = document.getElementById("progressBar");
   const isPlaying = encodeAudio(getCanvasData(), sstv.format, (progress) => {
     progressBar.style.width = `${progress * 100}%`;
+  }, () => {
+    playButton.textContent = "Play Signal";
   });
   playButton.textContent = isPlaying ? "Stop Signal" : "Play Signal";
 }

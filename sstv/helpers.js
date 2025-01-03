@@ -22,7 +22,7 @@ const audioCtx = new AudioContext();
 let currentOscillator = null;
 let stopEncoding = false;
 
-function encodeAudio(canvasData, encoder, progressCallback) {
+function encodeAudio(canvasData, encoder, progressCallback, endCallback) {
     if (!encoder) {
         console.error("SSTV encoder is not selected.");
         return false;
@@ -74,6 +74,9 @@ function encodeAudio(canvasData, encoder, progressCallback) {
         currentOscillator = null;
         if (!stopEncoding && progressCallback) {
             progressCallback(1);
+        }
+        if (endCallback) {
+            endCallback();
         }
         console.log("Signal playback ended.");
     };

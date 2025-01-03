@@ -47,7 +47,8 @@ html, body {
   width: 100%;
   background-color: #333;
   height: 10px;
-  margin-top: 50px;
+  position: fixed;
+  top: 50px; /* Position right below the controls container */
 }
 .progress-bar {
   width: 0;
@@ -60,6 +61,7 @@ html, body {
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: 70px; /* Adjust margin to avoid overlap with controls and progress bar */
 }
 canvas {
   display: block;
