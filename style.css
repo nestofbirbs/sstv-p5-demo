@@ -45,24 +45,27 @@ html, body {
   align-items: center;
   font-size: 0;
   border: 1px solid #333;
-  background-color: #4f4e4e;
-  color: #e0e0e0;
+  background-color: #ca258b; /* Changed color to a more vibrant blue */
+  color: #ffffff; /* Changed text color to white */
   cursor: pointer;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
+#startButton:hover {
+  background-color: #9e1e6d; /* Darken color on hover */
+}
 #startButton::before {
-  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e0e0e0"><polygon points="7,3 21,12 7,21"/></svg>');
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><polygon points="7,3 21,12 7,21"/></svg>'); /* Updated fill color */
   display: block;
   width: 24px;
   height: 24px;
 }
 #startButton.playing::before {
-  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e0e0e0"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>');
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>'); /* Updated fill color */
 }
-#modeSelect:hover, #startButton:hover, #downloadButton:hover {
+#modeSelect:hover, #downloadButton:hover {
   background-color: #3e3e3e;
 }
 #modeSelect:focus, #startButton:focus, #downloadButton:focus {
