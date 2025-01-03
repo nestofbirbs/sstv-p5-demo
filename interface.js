@@ -70,19 +70,38 @@ function playCallback() {
   const playButton = document.getElementById("startButton");
   const progressBar = document.getElementById("progressBar");
   const overlay = document.getElementById("overlay");
-  const isPlaying = encodeAudio(getCanvasData(), sstv.format, (progress) => {
-    let percent = max(0,progress);
-    progressBar.style.width = `${max(0,percent) * 100}%`;
-    overlay.style.height = `${100 - percent * 100}%`;
-    console.log(`percent: ${percent * 100}%`);
-  }, () => {
-    playButton.textContent = "Play Signal";
-    overlay.style.display = "none";
-  });
+
+  const isPlaying = encodeAudio(getCanvasData(), sstv.format, updateProgressBar, onEncodingComplete);
+
+  updatePlayButton(playButton, isPlaying);
+  toggleOverlay(overlay, isPlaying);
+}
+
+function updateProgressBar(progress) {
+  const progressBar = document.getElementById("progressBar");
+  const overlay = document.getElementById("overlay");
+  let percent = Math.max(0, progress); // ignore negative values
+  progressBar.style.width = `${percent * 100}%`;
+  overlay.style.height = `${100 - percent * 100}%`;
+}
+
+function onEncodingComplete() {
+  const playButton = document.getElementById("startButton");
+  const overlay = document.getElementById("overlay");
+  playButton.textContent = "Play Signal";
+  overlay.style.display = "none";
+}
+
+function updatePlayButton(playButton, isPlaying) {
   playButton.textContent = isPlaying ? "Stop Signal" : "Play Signal";
+}
+
+function toggleOverlay(overlay, isPlaying) {
   if (isPlaying) {
     overlay.style.display = "block";
     overlay.style.height = "100%";
+  } else {
+    overlay.style.display = "none";
   }
 }
 
