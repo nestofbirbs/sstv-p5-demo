@@ -29,9 +29,9 @@ html, body {
 #modeSelect {
   padding: 6px 10px;
   font-size: 12px;
-  border: 1px solid #333;
+  border: 1px solid #575757;
   border-radius: 5px;
-  background-color: #2e2e2e;
+  background-color: #383838;
   color: #e0e0e0;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); */
   cursor: pointer;
@@ -67,7 +67,7 @@ html, body {
   justify-content: center;
   align-items: center;
   font-size: 0;
-  border: 1px solid #333;
+  border-style: none;
   background-color: #ca258b; /* Changed color to a more vibrant blue */
   color: #ffffff; /* Changed text color to white */
   cursor: pointer;
