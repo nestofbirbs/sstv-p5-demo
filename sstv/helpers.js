@@ -19,9 +19,9 @@ copies or substantial portions of the Software.
 
 const audioCtx = new AudioContext();
 
-function encodeAudio(canvasData) {
-    if (!sstvFormat) {
-        console.error("SSTV format is not selected.");
+function encodeAudio(canvasData, encoder) {
+    if (!encoder) {
+        console.error("SSTV encoder is not selected.");
         return;
     }
 
@@ -30,9 +30,9 @@ function encodeAudio(canvasData) {
 
     oscillator.connect(audioCtx.destination);
 
-    sstvFormat.prepareImage(canvasData.data);
+    encoder.prepareImage(canvasData.data);
     let startTime = audioCtx.currentTime + 1;
-    let endTime = sstvFormat.encodeSSTV(oscillator, audioCtx.currentTime + 1);
+    let endTime = encoder.encodeSSTV(oscillator, audioCtx.currentTime + 1);
     oscillator.start(startTime);
     oscillator.stop(endTime);
 };
@@ -61,8 +61,8 @@ function createWAVHeader(audioLength) {
     return header;
 }
 
-function downloadAudio(canvasData) {
-    if (!sstvFormat) {
+function downloadAudio(canvasData, encoder) {
+    if (!encoder) {
         console.error("SSTV format is not selected.");
         return;
     }
@@ -71,15 +71,15 @@ function downloadAudio(canvasData) {
         audioCtx.resume();
     }
 
-    sstvSignalDuration = sstvFormat.getEncodedLength() + 1;
+    sstvSignalDuration = encoder.getEncodedLength() + 1;
     const offlineCtx = new OfflineAudioContext(1, 48000 * sstvSignalDuration, 48000);
     let oscillator = offlineCtx.createOscillator();
     oscillator.type = "sine";
 
     oscillator.connect(offlineCtx.destination);
 
-    sstvFormat.prepareImage(canvasData.data);
-    endTime = sstvFormat.encodeSSTV(oscillator, 1);
+    encoder.prepareImage(canvasData.data);
+    endTime = encoder.encodeSSTV(oscillator, 1);
     console.log(endTime - 1);
     oscillator.start(1);
 

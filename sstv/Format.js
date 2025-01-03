@@ -19,17 +19,18 @@ copies or substantial portions of the Software.
 
 class Format {
 
+	#modeName;
 	#numScanLines;
-	#vertResolution;
+	#pixelsPerLine;
 	#blankingInterval;
 	#scanLineLength;
 	#syncPulseLength;
 	#VISCode;
 	#preparedImage = [];
 
-	constructor(numScanLines, vertResolution, blankingInterval, scanLineLength, syncPulseLength, VISCode) {
+	constructor(numScanLines, pixelsPerLine, blankingInterval, scanLineLength, syncPulseLength, VISCode) {
 		this.#numScanLines = numScanLines;
-		this.#vertResolution = vertResolution;
+		this.#pixelsPerLine = pixelsPerLine;
 		this.#blankingInterval = blankingInterval;
 		this.#scanLineLength = scanLineLength;
 		this.#syncPulseLength = syncPulseLength;
@@ -37,13 +38,13 @@ class Format {
 	}
 
 	getGreyscaleFreq(data, scanLine, vertPos) {
-		const index = scanLine * (this.#vertResolution * 4) + vertPos * 4;
+		const index = scanLine * (this.#pixelsPerLine * 4) + vertPos * 4;
 		let grey = data[index] * 0.299 + 0.587 * data[index + 1] + 0.114 * data[index + 2]
 		return grey * COLOR_FREQ_MULT + 1500
 	}
 
 	getRGBValueAsFreq(data, scanLine, vertPos) {
-		const index = scanLine * (this.#vertResolution * 4) + vertPos * 4;
+		const index = scanLine * (this.#pixelsPerLine * 4) + vertPos * 4;
 		let red = data[index] * COLOR_FREQ_MULT + 1500;
 		let green = data[index + 1] * COLOR_FREQ_MULT + 1500;
 		let blue = data[index + 2] * COLOR_FREQ_MULT + 1500;
@@ -51,7 +52,7 @@ class Format {
 	}
 
 	getYRYBYValueAsFreq(data, scanLine, vertPos) {
-		const index = scanLine * (this.#vertResolution * 4) + vertPos * 4;
+		const index = scanLine * (this.#pixelsPerLine * 4) + vertPos * 4;
 		let red = data[index];
 		let green = data[index + 1];
 		let blue = data[index + 2];
@@ -136,11 +137,19 @@ class Format {
 		throw new Error("Must be defined by a subclass");
 	}
 
+	get modeName() {
+		return this.#modeName;
+	}
+
+	set modeName(value) {
+		this.#modeName = value;
+	}
+
 	get numScanLines() {
 		return this.#numScanLines;
 	}
-	get vertResolution() {
-		return this.#vertResolution;
+	get pixelsPerLine() {
+		return this.#pixelsPerLine;
 	}
 	get blankingInterval() {
 		return this.#blankingInterval;

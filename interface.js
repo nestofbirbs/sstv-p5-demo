@@ -1,32 +1,58 @@
 // Create the dropdown menu to select the SSTV mode
 // and the buttons to encode and download the audio
-function createUserInterface() {
+function createUserInterface(defaultMode) {
+
+  if(!defaultMode) {
+    console.error("Default mode is missing when creating interface.");
+    return;
+  }
+
   modeSelect = createSelect();
   modeSelect.position(10, 10);
 
   // Populate options using SSTV_MODES
-  for (const [key, { label }] of Object.entries(SSTV_MODES)) {
-    modeSelect.option(label, key);
+  for (const [key, { name }] of Object.entries(SSTV_MODES)) {
+    modeSelect.option(name, key);
   }
 
   // Retrieve the last selected mode from localStorage or set default
-  const startingMode = localStorage.getItem("sstvMode") || "M1";
+  const startingMode = localStorage.getItem("sstvMode") || defaultMode;
   modeSelect.selected(startingMode);
-  initializeFormat(startingMode);
+  sstv.mode = startingMode;
+  updateCanvasFormat();
 
   // Set callback for mode selection
   modeSelect.changed(() => {
     const mode = modeSelect.value();
-    console.log(`Selected mode: ${mode} (${SSTV_MODES[mode].label})`);
-    updateFormat(mode);
+    console.log(`Selected mode: ${mode} (${SSTV_MODES[mode].name})`);
+    sstv.mode = mode;
     localStorage.setItem("sstvMode", mode); // Save selected mode to localStorage
+    updateCanvasFormat();
   });
 
   // Create button for encoding
-  createValidatedButton("Encode", "startButton", encodeAudio);
+  createValidatedButton("Play Signal", "startButton", playCallback);
 
   // Create button for downloading
-  createValidatedButton("Download", "downloadButton", downloadAudio);
+  createValidatedButton("Download .wav", "downloadButton", downloadCallback);
+}
+
+function playCallback() {
+  console.log("Playing audio...");
+  encodeAudio(getCanvasData(), sstv.format);
+}
+
+function downloadCallback() {
+  console.log("Downloading audio...");
+  downloadAudio(getCanvasData(), sstv.format);
+}
+
+function updateCanvasFormat() {
+  console.log(`Updating canvas format for mode: ${sstv.mode}`);
+  const w = sstv.pixelsPerLine;
+  const h = sstv.numScanLines;
+  console.log(`Canvas dimensions: ${w} x ${h}`);
+  resizeCanvas(w, h);
 }
 
 function createValidatedButton(label, id, callback) {
