@@ -54,20 +54,13 @@ html, body {
   transform: translate(-50%, -50%);
 }
 #startButton::before {
-  content: '';
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e0e0e0"><polygon points="7,3 21,12 7,21"/></svg>');
   display: block;
-  width: 0;
-  height: 0;
-  border-left: 15px solid #e0e0e0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
+  width: 24px;
+  height: 24px;
 }
 #startButton.playing::before {
-  content: '';
-  display: block;
-  width: 10px;
-  height: 20px;
-  background-color: #e0e0e0;
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e0e0e0"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>');
 }
 #modeSelect:hover, #startButton:hover, #downloadButton:hover {
   background-color: #3e3e3e;
