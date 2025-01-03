@@ -33,7 +33,7 @@ const VIS_BIT_FREQ = {
 
 const SSTV_MODES = {
     M1: { label: "Martin M1", class: "Martin", pixelsPerLine: 320, lines: 256, headerLines: 16 },
-    M2: { label: "Martin M2", class: "Martin", pixelsPerLine: 160, lines: 256, headerLines: 16 },
+    M2: { label: "Martin M2", class: "Martin", pixelsPerLine: 320, lines: 256, headerLines: 16 },
     S1: { label: "Scottie 1", class: "Scottie", pixelsPerLine: 320, lines: 256, headerLines: 16 },
     S2: { label: "Scottie 2", class: "Scottie", pixelsPerLine: 160, lines: 256, headerLines: 16 },
     SDX: { label: "Scottie DX", class: "Scottie", pixelsPerLine: 320, lines: 256, headerLines: 16 },
