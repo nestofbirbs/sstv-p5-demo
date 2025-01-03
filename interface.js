@@ -52,7 +52,7 @@ function createUserInterface(defaultMode) {
   // Create progress bar
   const progressBarContainer = createDiv();
   progressBarContainer.class('progress-bar-container');
-  progressBarContainer.parent(controlsContainer);
+  progressBarContainer.parent(document.body); // Append to body to position behind controls
 
   const progressBar = createDiv();
   progressBar.class('progress-bar');
@@ -68,13 +68,22 @@ function createUserInterface(defaultMode) {
 
 function playCallback() {
   const playButton = document.getElementById("startButton");
-  const progressBar = document.getElementById("progressBar");
+  const progressBarContainer = document.querySelector(".progress-bar-container");
   const overlay = document.getElementById("overlay");
 
   const isPlaying = encodeAudio(getCanvasData(), sstv.format, updateProgressBar, onEncodingComplete);
 
   updatePlayButton(playButton, isPlaying);
   toggleOverlay(overlay, isPlaying);
+  toggleProgressBar(progressBarContainer, isPlaying);
+}
+
+function toggleProgressBar(progressBarContainer, isPlaying) {
+  if (isPlaying) {
+    progressBarContainer.classList.add("show");
+  } else {
+    progressBarContainer.classList.remove("show");
+  }
 }
 
 function updateProgressBar(progress) {
@@ -88,8 +97,10 @@ function updateProgressBar(progress) {
 function onEncodingComplete() {
   const playButton = document.getElementById("startButton");
   const overlay = document.getElementById("overlay");
+  const progressBarContainer = document.querySelector(".progress-bar-container");
   playButton.textContent = "Play Signal";
   overlay.style.display = "none";
+  progressBarContainer.classList.remove("show");
 }
 
 function updatePlayButton(playButton, isPlaying) {
