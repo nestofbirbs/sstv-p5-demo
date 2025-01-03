@@ -51,8 +51,9 @@ function createUserInterface(defaultMode) {
 }
 
 function playCallback() {
-  console.log("Playing audio...");
-  encodeAudio(getCanvasData(), sstv.format);
+  const playButton = document.getElementById("startButton");
+  const isPlaying = encodeAudio(getCanvasData(), sstv.format);
+  playButton.textContent = isPlaying ? "Stop Signal" : "Play Signal";
 }
 
 function downloadCallback() {

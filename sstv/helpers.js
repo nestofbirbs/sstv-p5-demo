@@ -19,15 +19,24 @@ copies or substantial portions of the Software.
 
 const audioCtx = new AudioContext();
 
+let currentOscillator = null;
+
 function encodeAudio(canvasData, encoder) {
     if (!encoder) {
         console.error("SSTV encoder is not selected.");
-        return;
+        return false;
+    }
+
+    if (currentOscillator) {
+        currentOscillator.stop();
+        currentOscillator.disconnect();
+        currentOscillator = null;
+        console.log("Stopped previous signal.");
+        return false;
     }
 
     let oscillator = audioCtx.createOscillator();
     oscillator.type = "sine";
-
     oscillator.connect(audioCtx.destination);
 
     encoder.prepareImage(canvasData.data);
@@ -35,7 +44,15 @@ function encodeAudio(canvasData, encoder) {
     let endTime = encoder.encodeSSTV(oscillator, audioCtx.currentTime + 1);
     oscillator.start(startTime);
     oscillator.stop(endTime);
-};
+
+    currentOscillator = oscillator;
+    oscillator.onended = () => {
+        currentOscillator = null;
+        console.log("Signal playback ended.");
+    };
+
+    return true;
+}
 
 function createWAVHeader(audioLength) {
     const headerSize = 44;
