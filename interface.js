@@ -44,7 +44,7 @@ function createUserInterface(defaultMode) {
   });
 
   // Create button for encoding
-  createValidatedButton("Play Signal", "startButton", playCallback, rightContainer);
+  createValidatedButton("", "startButton", playCallback, rightContainer);
 
   // Create button for downloading
   createValidatedButton("Download .wav", "downloadButton", downloadCallback, rightContainer);
@@ -93,7 +93,7 @@ function onEncodingComplete() {
 }
 
 function updatePlayButton(playButton, isPlaying) {
-  playButton.textContent = isPlaying ? "Stop Signal" : "Play Signal";
+  playButton.classList.toggle("playing", isPlaying);
 }
 
 function toggleOverlay(overlay, isPlaying) {
