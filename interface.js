@@ -1,12 +1,14 @@
 // Create the dropdown menu to select the SSTV mode
 // and the buttons to encode and download the audio
-function createUserInterface(defaultMode) {
+function createUserInterface(defaultMode = "M1") {
+  setupWorkspace();
+  setupControls(defaultMode);
+  setupProgressBar();
+  setupDropOverlay();
+}
 
-  if(!defaultMode) {
-    console.error("Default mode is missing when creating interface.");
-    return;
-  }
-
+// New function to set up the workspace
+function setupWorkspace() {
   const workspace = createDiv();
   workspace.class('workspace');
   workspace.parent(document.body); // Append to body
@@ -16,7 +18,10 @@ function createUserInterface(defaultMode) {
   canvasWrapper.parent(workspace); // Append wrapper to workspace
 
   sketchCanvas.parent(canvasWrapper); // Append canvas to wrapper
+}
 
+// New function to set up the controls
+function setupControls(defaultMode) {
   const controlsContainer = createDiv();
   controlsContainer.class('controls');
   controlsContainer.parent(document.body); // Append to body
@@ -53,13 +58,13 @@ function createUserInterface(defaultMode) {
     resizeCanvasToMode();
   });
 
-  // Create button for encoding
+  // Create buttons
   createValidatedButton("", "startButton", playCallback, rightContainer);
-
-  // Create button for downloading
   createValidatedButton("Download .wav", "downloadButton", downloadCallback, rightContainer);
+}
 
-  // Create progress bar
+// New function to set up the progress bar
+function setupProgressBar() {
   const progressBarContainer = createDiv();
   progressBarContainer.class('progress-bar-container');
   progressBarContainer.parent(document.body); // Append to body to position behind controls
@@ -74,8 +79,10 @@ function createUserInterface(defaultMode) {
   overlay.class('progress-overlay');
   overlay.id('progress-overlay');
   overlay.parent(document.querySelector('.workspace .canvas-wrapper'));
+}
 
-  // Add drop overlay
+// New function to set up the drop overlay
+function setupDropOverlay() {
   const dropOverlay = createDiv('Drop image here');
   dropOverlay.class('drop-overlay');
   dropOverlay.parent(document.body);
