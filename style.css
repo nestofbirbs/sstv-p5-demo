@@ -109,7 +109,7 @@ html, body {
   background-color: #414141;
   height: 10px;
   position: fixed;
-  top: 60px; /* Position right below the controls container */
+  top: 58px; /* Position right below the controls container */
   transform: translateY(-100%);
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
   z-index: 1; /* Ensure it is behind the controls container */
