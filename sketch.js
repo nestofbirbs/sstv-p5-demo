@@ -70,7 +70,7 @@ function keyPressed() {
   let k = key.toLowerCase();
   switch (k) {
     case "r":
-      redraw(); // Resume draw loop on mouse click
+      redraw();
       break;
     case "t":
       drawTestCard();
