@@ -42,7 +42,7 @@ function createUserInterface(defaultMode) {
   const startingMode = localStorage.getItem("sstvMode") || defaultMode;
   modeSelect.selected(startingMode);
   sstv.mode = startingMode;
-  updateCanvasFormat();
+  resizeCanvasToMode();
 
   // Set callback for mode selection
   modeSelect.changed(() => {
@@ -50,7 +50,7 @@ function createUserInterface(defaultMode) {
     console.log(`Selected mode: ${mode} (${SSTV_MODES[mode].name})`);
     sstv.mode = mode;
     localStorage.setItem("sstvMode", mode); // Save selected mode to localStorage
-    updateCanvasFormat();
+    resizeCanvasToMode();
   });
 
   // Create button for encoding
@@ -81,20 +81,7 @@ function createUserInterface(defaultMode) {
   dropOverlay.parent(document.body);
 
   // Add event listeners for drag-and-drop
-  document.body.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    dropOverlay.addClass('show');
-  });
-
-  document.body.addEventListener('dragleave', () => {
-    dropOverlay.removeClass('show');
-  });
-
-  document.body.addEventListener('drop', (event) => {
-    event.preventDefault();
-    dropOverlay.removeClass('show');
-    handleFileDrop(event.dataTransfer.files);
-  });
+  setupDragAndDrop(dropOverlay);
 }
 
 function playCallback() {
@@ -152,12 +139,9 @@ function downloadCallback() {
   downloadAudio(getCanvasData(), sstv.format);
 }
 
-function updateCanvasFormat() {
-  console.log(`Updating canvas format for mode: ${sstv.mode}`);
-  const w = sstv.pixelsPerLine;
-  const h = sstv.numScanLines;
-  console.log(`Canvas dimensions: ${w} x ${h}`);
-  resizeCanvas(w, h);
+function resizeCanvasToMode() {
+  console.log(`Resizing canvas for mode: ${sstv.mode}`);
+  resizeCanvas(sstv.pixelsPerLine, sstv.numScanLines);
 }
 
 function createValidatedButton(label, id, callback, container) {
@@ -234,4 +218,19 @@ function handleFileDrop(files) {
       console.error("Dropped file is not an image.");
     }
   }
+}
+
+function setupDragAndDrop(dropOverlay) {
+  document.body.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropOverlay.addClass('show');
+  });
+  document.body.addEventListener('dragleave', () => {
+    dropOverlay.removeClass('show');
+  });
+  document.body.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropOverlay.removeClass('show');
+    handleFileDrop(e.dataTransfer.files);
+  });
 }
