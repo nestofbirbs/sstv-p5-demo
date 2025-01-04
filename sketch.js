@@ -63,7 +63,7 @@ function drawCallsign(
   stroke(255);
   strokeWeight(5);
   textAlign(CENTER, CENTER);
-  text(callsign, x, y); // Corrected variable name
+  text(callsign, x, y);
 }
 
 function keyPressed() {
