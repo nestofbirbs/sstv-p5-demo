@@ -21,14 +21,18 @@ function setup() {
 
 function draw() {
   background(255);
+  
   noStroke();
+
   for (let i = 0; i < 100; i++) {
     fill(random(255), random(255), random(255));
     ellipse(random(width), random(height), random(10, 100));
   }
 
   drawCallsign();
+
   saveCanvasData();
+
   noLoop(); // Stop draw loop after one iteration
 }
 
@@ -41,7 +45,7 @@ function saveCanvasData() {
   }
 }
 
-function drawTest(){
+function drawTestCard(){
   image(testPattern, 0, 0, width, height);
   drawCallsign();
   noLoop();
@@ -69,7 +73,7 @@ function keyPressed() {
       redraw(); // Resume draw loop on mouse click
       break;
     case "t":
-      drawTest();
+      drawTestCard();
       break;
     default:
       break;
