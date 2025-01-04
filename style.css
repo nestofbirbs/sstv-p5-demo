@@ -124,12 +124,12 @@ html, body {
   height: 100%;
   background-color: #e9c835;
 }
-.canvas-container {
+.workspace {
   display: flex;
   flex: 1;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   margin-top: 70px; /* Adjust margin to avoid overlap with controls and progress bar */
 }
 .canvas-wrapper {
@@ -149,4 +149,31 @@ canvas {
   background-color: rgba(0, 0, 0, 0.5);
   pointer-events: none;
   display: none; /* Initially hidden */
+}
+
+/* Add styles for the drop overlay */
+.drop-overlay {
+  position: fixed;
+  margin-top: 70px; /* Adjust margin to avoid overlap with controls and progress bar */
+  width: calc(100% - 25px); /* Add padding around the drop area */
+  height: calc(100% - 85px); /* Add padding around the drop area */
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.791);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3; /* Ensure it is above other elements */
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 2px dashed rgba(255, 255, 255, 0.698);
+  border-radius: 6px;
+}
+
+.drop-overlay.show {
+  opacity: 1;
 }

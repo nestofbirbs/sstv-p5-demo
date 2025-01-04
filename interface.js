@@ -7,6 +7,16 @@ function createUserInterface(defaultMode) {
     return;
   }
 
+  const workspace = createDiv();
+  workspace.class('workspace');
+  workspace.parent(document.body); // Append to body
+
+  const canvasWrapper = createDiv();
+  canvasWrapper.class('canvas-wrapper');
+  canvasWrapper.parent(workspace); // Append wrapper to workspace
+
+  sketchCanvas.parent(canvasWrapper); // Append canvas to wrapper
+
   const controlsContainer = createDiv();
   controlsContainer.class('controls');
   controlsContainer.parent(document.body); // Append to body
@@ -63,7 +73,28 @@ function createUserInterface(defaultMode) {
   const overlay = createDiv();
   overlay.class('progress-overlay');
   overlay.id('progress-overlay');
-  overlay.parent(document.querySelector('.canvas-wrapper'));
+  overlay.parent(document.querySelector('.workspace .canvas-wrapper'));
+
+  // Add drop overlay
+  const dropOverlay = createDiv('Drop image here');
+  dropOverlay.class('drop-overlay');
+  dropOverlay.parent(document.body);
+
+  // Add event listeners for drag-and-drop
+  document.body.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    dropOverlay.addClass('show');
+  });
+
+  document.body.addEventListener('dragleave', () => {
+    dropOverlay.removeClass('show');
+  });
+
+  document.body.addEventListener('drop', (event) => {
+    event.preventDefault();
+    dropOverlay.removeClass('show');
+    handleFileDrop(event.dataTransfer.files);
+  });
 }
 
 function playCallback() {
@@ -185,4 +216,22 @@ function validateCanvasData(canvasData) {
   }
 
   return true;
+}
+
+function handleFileDrop(files) {
+  if (files.length > 0) {
+    const file = files[0];
+    if (file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = loadImage(event.target.result, () => {
+          image(img, 0, 0, width, height);
+          drawCallsign();
+        });
+      };
+      reader.readAsDataURL(file);
+    } else {
+      console.error("Dropped file is not an image.");
+    }
+  }
 }
