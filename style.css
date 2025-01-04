@@ -1,9 +1,23 @@
+:root {
+  --controls-height: 30px;
+  --controls-padding: 15px;
+  --progress-bar-height: 10px;
+  --layout-margin-top: 70px;
+  --color-bg: #2e2e2e;
+  --color-fg: #e0e0e0;
+  --color-control-bg: #1e1e1e;
+  --color-secondary-bg: #383838;
+  --color-progress-bar: #e9c835;
+  --color-hero-button: #ca258b;
+  --color-hover-hero-button: #9e1e6d;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #2e2e2e;
-  color: #e0e0e0;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,11 +28,12 @@ html, body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 15px;
+  padding: var(--controls-padding);
   position: fixed;
   top: 0;
-  background-color: #1e1e1e;
+  background-color: var(--color-control-bg);
   z-index: 2; /* Ensure controls are above the progress bar */
+  height: var(--controls-height);
 }
 .controls .left, .controls .right {
   display: flex;
@@ -31,7 +46,7 @@ html, body {
   font-size: 12px;
   border: 1px solid #575757;
   border-radius: 5px;
-  background-color: #383838;
+  background-color: var(--color-secondary-bg);
   color: #e0e0e0;
   appearance: none; /* Hide the default caret */
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e0e0e0"><path d="M7 10l5 5 5-5z"/></svg>');
@@ -73,7 +88,7 @@ html, body {
   align-items: center;
   font-size: 0;
   border-style: none;
-  background-color: #ca258b; /* Changed color to a more vibrant blue */
+  background-color: var(--color-hero-button);
   color: #ffffff; /* Changed text color to white */
   cursor: pointer;
   position: absolute;
@@ -82,7 +97,7 @@ html, body {
   transform: translate(-50%, -50%);
 }
 #startButton:hover {
-  background-color: #9e1e6d; /* Darken color on hover */
+  background-color: var(--color-hover-hero-button);
 }
 #startButton::before {
   content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><polygon points="7,3 21,12 7,21"/></svg>'); /* Updated fill color */
@@ -107,9 +122,9 @@ html, body {
 .progress-bar-container {
   width: 100%;
   background-color: #414141;
-  height: 10px;
+  height: var(--progress-bar-height);
   position: fixed;
-  top: 58px; /* Position right below the controls container */
+  top: calc(var(--controls-height) + (2 * var(--controls-padding)));
   transform: translateY(-100%);
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
   z-index: 1; /* Ensure it is behind the controls container */
@@ -122,7 +137,7 @@ html, body {
 .progress-bar {
   width: 0;
   height: 100%;
-  background-color: #e9c835;
+  background-color: var(--color-progress-bar);
 }
 .workspace {
   display: flex;
@@ -130,7 +145,7 @@ html, body {
   justify-content: center;
   align-items: center;
   width: 100vw;
-  margin-top: 70px; /* Adjust margin to avoid overlap with controls and progress bar */
+  margin-top: var(--layout-margin-top); /* Adjust margin to avoid overlap with controls and progress bar */
 }
 .canvas-wrapper {
   position: relative;
@@ -154,7 +169,7 @@ canvas {
 /* Add styles for the drop overlay */
 .drop-overlay {
   position: fixed;
-  margin-top: 70px; /* Adjust margin to avoid overlap with controls and progress bar */
+  margin-top: var(--layout-margin-top); /* Adjust margin to avoid overlap with controls and progress bar */
   width: calc(100% - 25px); /* Add padding around the drop area */
   height: calc(100% - 85px); /* Add padding around the drop area */
   background-color: rgba(0, 0, 0, 0.5);
