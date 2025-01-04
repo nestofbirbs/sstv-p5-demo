@@ -20,13 +20,6 @@ function setup() {
 }
 
 function draw() {
-  if (isTesting) {
-    image(testPattern, 0, 0, width, height);
-    drawCallsign();
-    noLoop();
-    return;
-  }
-
   background(255);
   noStroke();
   for (let i = 0; i < 100; i++) {
@@ -35,9 +28,7 @@ function draw() {
   }
 
   drawCallsign();
-
   saveCanvasData();
-
   noLoop(); // Stop draw loop after one iteration
 }
 
@@ -48,6 +39,13 @@ function saveCanvasData() {
   } else {
     console.error(`Invalid canvas dimensions: ${width} x ${height}`);
   }
+}
+
+function drawTest(){
+  image(testPattern, 0, 0, width, height);
+  drawCallsign();
+  noLoop();
+  return;
 }
 
 function drawCallsign(
@@ -68,12 +66,10 @@ function keyPressed() {
   let k = key.toLowerCase();
   switch (k) {
     case "r":
-      isTesting = false;
       redraw(); // Resume draw loop on mouse click
       break;
     case "t":
-      isTesting = true;
-      redraw(); // Resume draw loop on mouse click
+      drawTest();
       break;
     default:
       break;
