@@ -67,8 +67,8 @@ function drawCallsign(
 }
 
 function keyPressed() {
-  let k = key.toLowerCase();
-  switch (k) {
+  let pressedKey = key.toLowerCase();
+  switch (pressedKey) {
     case "r":
       redraw();
       break;
