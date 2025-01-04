@@ -61,15 +61,15 @@ function createUserInterface(defaultMode) {
 
   // Create overlay
   const overlay = createDiv();
-  overlay.class('overlay');
-  overlay.id('overlay');
+  overlay.class('progress-overlay');
+  overlay.id('progress-overlay');
   overlay.parent(document.querySelector('.canvas-wrapper'));
 }
 
 function playCallback() {
   const playButton = document.getElementById("startButton");
   const progressBarContainer = document.querySelector(".progress-bar-container");
-  const overlay = document.getElementById("overlay");
+  const overlay = document.getElementById("progress-overlay");
 
   const isPlaying = encodeAudio(getCanvasData(), sstv.format, updateProgressBar, onEncodingComplete);
 
@@ -88,7 +88,7 @@ function toggleProgressBar(progressBarContainer, isPlaying) {
 
 function updateProgressBar(progress) {
   const progressBar = document.getElementById("progressBar");
-  const overlay = document.getElementById("overlay");
+  const overlay = document.getElementById("progress-overlay");
   let percent = Math.max(0, progress); // ignore negative values
   progressBar.style.width = `${percent * 100}%`;
   overlay.style.height = `${100 - percent * 100}%`;
@@ -96,7 +96,7 @@ function updateProgressBar(progress) {
 
 function onEncodingComplete() {
   const playButton = document.getElementById("startButton");
-  const overlay = document.getElementById("overlay");
+  const overlay = document.getElementById("progress-overlay");
   const progressBarContainer = document.querySelector(".progress-bar-container");
   playButton.textContent = "Play Signal";
   overlay.style.display = "none";
