@@ -2,10 +2,12 @@
 
 This project demonstrates how to encode images created with [p5.js](https://p5js.org/) into audio signals that can be transmitted over radio using [Slow Scan Television](https://en.wikipedia.org/wiki/Slow-scan_television) (SSTV).
 
+Try out the [Demo](https://sableraf.github.io/sstv-p5-demo/).
+
 This project is a fun way to learn about  encoding images and radio communication. It is not intended for anything serious. However, feel free to use it for educational purposes, to build cool art projects, or just for fun! Plus, if the internet disappears and you need to transmit your generative art over radio, you'll be ready 🙃
 
 > [!NOTE]
-> This project is heavily based on the amazing [Web-SSTV](https://github.com/CKegel/Web-SSTV/) by Christian Kegel. Please support the official release.
+> This project is heavily based on the amazing [Web-SSTV](https://github.com/CKegel/Web-SSTV/) by Christian Kegel. 
 
 ## About p5.js
 [p5.js](https://p5js.org/) is a friendly tool for learning how to code and make code-based art. It is inspired by [Processing](https://processing.org/), but is written in Javascript and runs in the browser.
