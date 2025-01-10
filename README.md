@@ -4,7 +4,7 @@ This project demonstrates how to encode images created with [p5.js](https://p5js
 
 Try out the [Demo](https://sableraf.github.io/sstv-p5-demo/).
 
-This project is a fun way to learn about  encoding images and radio communication. It is not intended for anything serious. However, feel free to use it for educational purposes, to build cool art projects, or just for fun! Plus, if the internet disappears and you need to transmit your generative art over radio, you'll be ready 🙃
+This is a fun way to learn about  encoding images and radio communication. It is not intended for anything serious. However, feel free to use it for educational purposes, to build cool art projects, or just for fun! Plus, if the internet disappears and you need to transmit your generative art over radio, you'll be ready 🙃
 
 > [!NOTE]
 > This project is heavily based on the amazing [Web-SSTV](https://github.com/CKegel/Web-SSTV/) by Christian Kegel. 
